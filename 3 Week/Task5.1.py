@@ -17,14 +17,19 @@ import LSpt5_t1_data as data
 data_country = data.data
 
 
-def county_list(data):
-    for element in data:
+def country_dict(data_list: list) -> list:
+    result = []
+    for element in data_list:
         try:
-            dict_county = {'Country': element[0], 'Town': element[1], 'Population': max(element[2:4]),
+            if len(element) < 5:
+                raise ValueError
+            dict_county = {'Country': element[1], 'Town': element[0], 'Population': max(element[2:4]),
                            'Square': element[4]}
-            print(f'{element} -> {dict_county}')
-        except IndexError:
-            print('Невозможно извлечь данные.')
+            result.append(dict_county)
+        except ValueError:
+            result.append('ValueError')
+    return result
 
 
-county_list(data_country)
+for i, el in enumerate(data_country):
+    print(f'{el} -> {country_dict(data_country)[i]}')
