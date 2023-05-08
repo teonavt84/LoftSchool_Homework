@@ -26,7 +26,7 @@ def replacing_digits(num, func_min_max):
     max_num = max(num)
     min_num = min(num)
     data_new = num.copy()
-    if func_min_max == False:
+    if not func_min_max:
         max_num, min_num = min_num, max_num
     for i, el in enumerate(data_new):
         if data_new[i] == min_num:
