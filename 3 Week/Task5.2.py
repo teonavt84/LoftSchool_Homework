@@ -53,4 +53,3 @@ for country, cities in result.items():
     print(country)
     for city in cities:
         print(city)
-    print()

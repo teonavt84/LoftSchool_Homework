@@ -4,11 +4,9 @@ data_country = data.data
 
 
 def country_dict(town: str, country: str, population_2018: int, population_now: int, square: int) -> list:
-    result = []
     dict_country = {'Country': country, 'Town': town, 'Population': max(population_2018, population_now),
                     'Square': square}
-    result.append(dict_country)
-    return result
+    return dict_country
 
 
 for element in data_country:

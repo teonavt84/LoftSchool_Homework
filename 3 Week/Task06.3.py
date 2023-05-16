@@ -11,6 +11,8 @@
 def func_list_num(begin: int, end: int) -> int:
     if end < begin:
         raise ValueError
+    if begin == end:
+        raise ValueError
     for num in range(begin, end+1):
         if num % 2 == 0:
             yield num
@@ -23,7 +25,6 @@ end = int(input('Введите число 2: '))
 try:
     list_num = func_list_num(begin, end)
     print(list_num)
-    print(f'({begin}, {end})', end=' -> ')
     for num in list_num:
         print(f'{num}', end=', ')
 except ValueError:
