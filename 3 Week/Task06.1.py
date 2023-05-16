@@ -15,7 +15,7 @@ def func_list_num(begin: int, end: int) -> list:
     list_num = []
     if end < begin:
         raise ValueError
-    if begin == end:
+    if begin % 2 == 1 and end % 2 == 1 and begin == end:
         raise ValueError
     list_num = [num for num in range(begin, end+1) if num % 2 == 0]
     return list_num
