@@ -1,55 +1,38 @@
-# Задача 2.
-# Написать функцию, которая будет собирать информацию по городам.
-# Техническое задание:
-# Функция:
-# – принимает аргумент - список списков (городов) (см.LSpt5_t1_data.py)
-# – возвращает словарь вида: Ключ - Страна, Значение - список словарей
-# – Для извлечения данных о конкретном городе используйте функцию, созданную в задании 1: скопируйте ее код в код программы.
-# – Корректно обрабатывайте исключения ValueError, которое она будет поднимать, в этом случае в итоговый словарь город не включается.
-# – При определении функции использовать Аннотации и проверки типов(type hinting).
-# – Список из LSpt5_t1_data.py скопируйте себе в код программы.
-# Пример:
-# {"Страна", [
-#           {"town1": xxxx, "population": xxxx, "square": xxxx}
-#           {"town1": xxxx, "population": xxxx, "square": xxxx}
-#           {"town1": xxxx, "population": xxxx, "square": xxxx}
-#           ]
-# }
-# <function_name>(data) -> словарь
-#
-# Проверьте: Для Японии
-# [{'town': 'Токио', 'population': 38505000, 'square': 8223},
-# {'town': 'Осака', 'population': 19281000, 'square': 3004},
-# {'town': 'Нагоя', 'population': 10240000, 'square': 3704},
-# {'town': 'Фукуока', 'population': 5551000, 'square': 505}]
-#
-# Для России [{'town': 'Москва', 'population': 16555000, 'square': 5698}]
 import LSpt5_t1_data as data
 
 data_country = data.data
 
 
-def group_by_country(data: list) -> dict:
-    result = {}
-    for element in data:
+def country_dict(data_list):
+    result = []
+    for element in data_list:
         try:
             if len(element) < 5:
                 raise ValueError
-            country = element[1]
-            town = element[0]
-            population_2018 = element[2]
-            population_now = element[3]
-            square = element[4]
-            if country not in result:
-                result[country] = []
-            result[country].append({'town': town, 'population': max(population_2018, population_now), 'square': square})
+            country_dict = {'Country': element[1], 'Town': element[0], 'Population': max(element[2:4]), 'Square': element[4]}
+            result.append(country_dict)
         except ValueError:
             continue
     return result
 
 
-result = group_by_country(data_country)
-for country, cities in result.items():
+def group_by_country(data):
+    res = country_dict(data)
+    result = {}
+    for element in res:
+        country = element['Country']
+        town = element['Town']
+        population = element['Population']
+        square = element['Square']
+        if country not in result:
+            result[country] = []
+        result[country].append({'town': town, 'population': population, 'square': square})
+    return result
+
+
+city_info = group_by_country(data_country)
+
+for country, cities in city_info.items():
     print(country)
     for city in cities:
         print(city)

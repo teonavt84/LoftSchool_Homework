@@ -29,11 +29,10 @@ def country_dict(data_list: list) -> dict:
     return dict_county
 
 
-while i < len(data_country):
-    for i, el in enumerate(data_country):
-        try:
-            print(f'{el} -> {country_dict([el])}')
-        except ValueError:
-            print(f'{el} -> ValueError')
-    i += 1
+for i, el in enumerate(data_country):
+    try:
+        print(f'{el} -> {country_dict([el])}')
+    except ValueError:
+        print(f'{el} -> ValueError')
+
 
